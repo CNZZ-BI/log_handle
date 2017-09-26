@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<context:component-scan base-package="com.mvc"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/html;charset=UTF-8" />
+				<property name="features">
+					<array>
+						<value>WriteMapNullValue</value>
+						<value>WriteNullStringAsEmpty</value>
+					</array>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<mvc:default-servlet-handler />
+	<!-- springmvc 提供的 路由 -->
+	<mvc:view-controller path="login.do" view-name="index" />
+	<!-- 配置 springmvc 控制器适配器 <mvc:interceptors> <mvc:interceptor> 配置需要拦截的映射资源路径 
+		springmvc 资源路径也是支持的ANT 风格的url书写规范 <mvc:mapping path="/*/*"/> <bean class="com.xin.network.interceptor.ConsoleIntecptor"/> 
+		</mvc:interceptor> </mvc:interceptors> -->
+
+	<!-- 内部资源视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
+</beans>

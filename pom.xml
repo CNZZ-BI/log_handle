@@ -1,0 +1,168 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xin.network</groupId>
+	<artifactId>user-console</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+	<build>
+		<defaultGoal>compile</defaultGoal>
+		<!-- 设置项目中依赖jar版本为1.7 Start -->
+		<finalName>spring-mvc-project</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<!-- 设置项目中依赖jar版本为1.7 End -->
+	</build>
+	<!-- properties 定义 ：用于定义依赖以及插件的自定义版本.以及可以设置工程的编译码表UTF-8 project.build.sourceEncoding:设置工程的编译码表UTF-8 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>4.0.4.RELEASE</spring.version>
+		<mybatis.version>3.2.3</mybatis.version>
+	</properties>
+
+	<!-- 引入相关的依赖 -->
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<!-- provided 属性 表示当前的 jar 在 编译的时候使用 ，打成war包的时候把会把该包打入war包 ，war 包放入到哦tomcat 
+				这样的服务器,tomcat 提供了。 -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 引入spring 相关依赖 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- 导入mybatis 相关的jar 包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+
+		<!-- 导入 log4j 日志jar 包 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.17.1-GA</version>
+		</dependency>
+		<!-- mybatis_spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- spring_tx -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 导入 mysql 驱动 -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.0.5</version>
+		</dependency>
+
+		<!-- 导入druid数据源 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.26</version>
+		</dependency>
+		<!-- json 转换工具 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.31</version>
+		</dependency>
+		<!-- ehcahe -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- jstl 标签 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.maxmind.db</groupId>
+			<artifactId>maxmind-db</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.maxmind.geoip2/geoip2 -->
+		<dependency>
+			<groupId>com.maxmind.geoip2</groupId>
+			<artifactId>geoip2</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<!-- 邮件的jar -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

@@ -1,0 +1,13 @@
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 开启懒加载的总开关 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- 按需加载  ：默认关闭的true,在使用当前的class对象的任何属性就会发sql,如果设置成false开启按需加载，class对象就不会调用任何属性发出关联的sql，只有调用
+			  关联的对象的时候才会发sql
+		  -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+</configuration>

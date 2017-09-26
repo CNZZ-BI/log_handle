@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mvc.mapper.SysRegionMapper" >
+  <resultMap id="BaseResultMap" type="com.mvc.model.SysRegionModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="jianpin" property="jianpin" jdbcType="VARCHAR" />
+    <result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
+    <result column="zipCode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="isHot" property="ishot" jdbcType="INTEGER" />
+    <result column="lng" property="lng" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
+    <result column="provinceName" property="provincename" jdbcType="VARCHAR" />
+    <result column="cityId" property="cityid" jdbcType="INTEGER" />
+    <result column="cityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="districtId" property="districtid" jdbcType="INTEGER" />
+    <result column="districtName" property="districtname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    name, fullname, level, jianpin, pinyin, zipCode, sort, isHot, lng, lat, parentId, 
+    provinceId, provinceName, cityId, cityName, districtId, districtName
+  </sql>
+  
+  <select id="getSysRegionID"  resultMap="BaseResultMap">
+  	select provinceId,cityId,districtId from sys_region 
+  	  where  provinceName=#{provinceName} and cityName=#{cityName}  and  
+  	  districtName=#{districtName}
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mvc.mapper.AdaCollectAccessLogMapper" >
+  <resultMap id="BaseResultMap" type="com.mvc.model.AdaCollectAccessLogModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="siteId" property="siteid" jdbcType="INTEGER" />
+    <result column="logType" property="logtype" jdbcType="INTEGER" />
+    <result column="requestId" property="requestid" jdbcType="VARCHAR" />
+    <result column="clientId" property="clientid" jdbcType="VARCHAR" />
+    <result column="userAgent" property="useragent" jdbcType="VARCHAR" />
+    <result column="requestUrl" property="requesturl" jdbcType="VARCHAR" />
+    <result column="referer" property="referer" jdbcType="VARCHAR" />
+    <result column="realReferer" property="realreferer" jdbcType="VARCHAR" />
+    <result column="remoteIp" property="remoteip" jdbcType="VARCHAR" />
+    <result column="realIp" property="realip" jdbcType="VARCHAR" />
+    <result column="os" property="os" jdbcType="VARCHAR" />
+    <result column="domain" property="domain" jdbcType="VARCHAR" />
+    <result column="countryId" property="countryid" jdbcType="INTEGER" />
+    <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
+    <result column="cityId" property="cityid" jdbcType="INTEGER" />
+    <result column="accessTime" property="accesstime" jdbcType="DATE" />
+    <result column="createTime" property="createtime" jdbcType="DATE" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    siteId, logType, requestId, clientId, userAgent, requestUrl, referer, realReferer, 
+    remoteIp, realIp, os, domain, countryId, provinceId, cityId, accessTime, createTime
+  </sql>
+  <!-- 
+	通过用户名查询一个用户，如果无参数传递，则不需要parameterType属性
+	parameterMap表示需要在自定义一个parameterMap标签，当属性值为java.util.Map时表示传入多个参数
+	resultMap表示返回多列数据，仅用于select语句
+	resultType表示返回单列数据，仅用于select语句
+  -->
+  
+  <!-- 依次插入日志数据 -->
+  <insert id="insert" parameterType="com.mvc.model.AdaCollectAccessLogModel">
+  	 insert into ada_collect_access_log(<include refid="Base_Column_List" />) 
+  	 values(#{siteid},#{logtype},#{requestid},#{clientid},
+  	 #{useragent},#{requesturl},#{referer},#{realreferer},
+  	 #{remoteip},#{realip},#{os},#{domain},
+  	 #{countryid},#{provinceid},#{cityid},#{accesstime},now())
+  </insert>
+  
+  <!-- 批量插入日志数据 -->
+  <insert id="addTrainRecordBatch" useGeneratedKeys="true" parameterType="java.util.List">  
+       insert into ada_collect_access_log(<include refid="Base_Column_List" />)    
+       values   
+       <foreach collection="list" item="item" index="index" separator="," >  
+           (#{item.siteid},#{item.logtype},#{item.requestid},#{item.clientid},
+		  	 #{item.useragent},#{item.requesturl},#{item.referer},#{item.realreferer},
+		  	 #{item.remoteip},#{item.realip},#{item.os},#{item.domain},
+		  	 #{item.countryid},#{item.provinceid},#{item.cityid},#{item.accesstime},now())  
+       </foreach>  
+   </insert>  
+   
+   
+  <!-- 
+  	  <selectKey resultType="long" keyProperty="id" order="AFTER">  
+           SELECT  
+           LAST_INSERT_ID()  
+      </selectKey> 
+    -->
+</mapper>
